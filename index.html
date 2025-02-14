@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Countdown</title>
+    <title>The PAZAM Erupts</title>
     <style>
         @keyframes pulse {
             0% { transform: scale(1); opacity: 1; }
@@ -14,7 +14,7 @@
         body { 
             text-align: center; 
             font-family: 'Arial', sans-serif; 
-            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+			background: url('MD4.jpg') no-repeat center center fixed;
             color: white; 
             display: flex;
             flex-direction: column;
@@ -23,7 +23,16 @@
             height: 100vh;
             margin: 0;
         }
-        
+        body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Adjust opacity here */
+    z-index: -1; /* Ensure it's behind the content */
+}
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
@@ -52,12 +61,12 @@
             font-size: 2.5em;
             font-weight: bold;
             text-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
-            animation: pulse 2s infinite;
+            animation: pulse 30000ms infinite;
         }
     </style>
 </head>
 <body>
-    <h1>Event Countdown</h1>
+    <h1>The PAZAM Bursts</h1>
     <div id="progress-container"><div id="progress-bar"></div></div>
     <div id="time-left"></div>
 
