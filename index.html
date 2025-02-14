@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Countdown</title>
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        body { 
+            text-align: center; 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+
+        #progress-container {
+            width: 80%;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            transition: width 0.5s ease-out;
+            box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
+        }
+
+        #time-left {
+            margin-top: 20px;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>Event Countdown</h1>
+    <div id="progress-container"><div id="progress-bar"></div></div>
+    <div id="time-left"></div>
+
+    <script>
+        const eventTime = new Date("2025-08-10T15:00:00").getTime();
+        const startTime = new Date("2024-10-27T00:00:00").getTime();
+
+        function updateProgressBar() {
+            const now = new Date().getTime();
+            const elapsed = now - startTime;
+            const totalDuration = eventTime - startTime;
+            const remaining = eventTime - now;
+
+            const percentage = Math.min((elapsed / totalDuration) * 100, 100);
+            document.getElementById("progress-bar").style.width = percentage + "%";
+
+            const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+            document.getElementById("time-left").textContent = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s left`;
+
+            if (remaining > 0) {
+                requestAnimationFrame(updateProgressBar);
+            } else {
+                document.getElementById("time-left").textContent = "🎉 Event Started! 🎉";
+                document.getElementById("progress-bar").style.width = "100%";
+            }
+        }
+
+        updateProgressBar();
+    </script>
+</body>
+</html>
