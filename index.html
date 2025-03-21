@@ -81,7 +81,7 @@
 
     <script>
         const eventTime = new Date("2025-07-28T00:00:00").getTime();
-        const startTime = new Date("2024-10-27T00:00:00").getTime();
+        const startTime = new Date("2022-07-28T00:00:00").getTime();
 
         function updateProgressBar() {
             const now = new Date().getTime();
@@ -91,7 +91,7 @@
 
             const percentage = Math.min((elapsed / totalDuration) * 100, 100);
             document.getElementById("progress-bar").style.width = percentage + "%";
-            document.getElementById("percentage").textContent = `Progress: ${percentage.toFixed(5)}%`;
+            document.getElementById("percentage").textContent = `Progress: ${percentage.toFixed(6)}%`;
 
             const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
             const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
